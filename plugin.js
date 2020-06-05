@@ -1,4 +1,13 @@
-// A plugin would provide an object like this:
+// "js_url": "https://pastebin.com/raw/EfKuJhGi",
+
+// ID from Zipwhip App Store
+// 650c1506-2d69-4fcb-afa8-614e11c88c87
+
+// ID for Dev version in App Store
+// 773099ed-54ed-42ac-80d9-5c17a928a83e
+
+// Language Translator Plugin
+
 var pluginLangTranslator = {
     // The ID should be camel case, prefixed with your company name/initials, and be a short
     // name for this plugin. It gets pre-pended to a lot of HTML element class names, CSS styles,
@@ -30,17 +39,30 @@ var pluginLangTranslator = {
         // will need it in the future.
         zw.plugin.register(this.id, this.settings, this);
 
-        zw.plugin.addCss("." + this.id + `-composebox-topregion-body {
-flex-direction: row;
-display: flex;
-width: 100%;
+        zw.plugin.addCss(
+"." + this.id + `-composebox-topregion-body {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+}
+.` + this.id + `-mainrow {
+    flex-direction: row;
+    display: flex;
+    font-size: 12px;
+}
+.` + this.id + `-title {
+    flex-grow:1;
 }
 .` + this.id + `-translatedtext {
-flex-grow: 1;
+    flex-grow: 1;
 }
-.plugin-select-airy {
-border: 0px;
-background: transparent;
+select.` + this.id + `-onoffauto {
+    font-size:12px;
+}
+select.plugin-select-airy {
+    font-size:12px;
+    border: 0px;
+    background: transparent;
 }
 `);
         zw.plugin.addCssUrl();
@@ -319,19 +341,22 @@ background: transparent;
         // create element
         bodyEl = $(`
 <div class="` + this.id + `-composebox-topregion-body">
-<div class="` + this.id + `-translatedtext"></div>
-<div class="` + this.id + `-langtools">
-<select class="` + this.id + `-langselect plugin-select-airy zk-styled-text-base">
-<option value="-">-</option>
-</select>
-</div>
-<div class="` + this.id + `-onoffauto">
-<select class="` + this.id + `-transonoffauto plugin-select-airy zk-styled-text-base">
-<option>Auto</option>
-<option>On</option>
-<option>Off</option>
-</select>
-</div>
+    <div class="` + this.id + `-mainrow">
+        <div class="` + this.id + `-title">Language Translator - French</div>
+        <div class="` + this.id + `-langtools">
+            <select class="` + this.id + `-langselect plugin-select-airy zk-styled-text-base">
+            <option value="-">-</option>
+            </select>
+        </div>
+        <div class="` + this.id + `-onoffauto">
+            <select class="` + this.id + `-transonoffauto plugin-select-airy zk-styled-text-base">
+            <option>Auto</option>
+            <option>On</option>
+            <option>Off</option>
+            </select>
+        </div>
+    </div>
+    <div class="` + this.id + `-translatedtext"></div>
 </div>
 `);
         regionEl.find(".plugin-composebox-topregion-body").append(bodyEl);
