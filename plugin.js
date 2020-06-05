@@ -6,6 +6,24 @@
 // ID for Dev version in App Store
 // 773099ed-54ed-42ac-80d9-5c17a928a83e
 
+/*
+{
+    "metadata": {
+        "logoUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fqph.fs.quoracdn.net%2Fmain-qimg-0507516972095fdc1d4739f031c7ae99&f=1&nofb=1",
+        "name": "Translator (Localhost Dev)",
+        "tagline": "Translate languages",
+        "description": ""
+    },
+    "urls": {
+        "activate_url": "http://178.128.129.151:8080/function/translate/activate",
+        "deactivate_url": "http://178.128.129.151:8080/function/translate/deactivate",
+        "js_url": "http://localhost:8080/zw-plugin-langtrans/plugin.js"
+    },
+    "published": true,
+    "comingSoon": false
+}
+*/
+
 // Language Translator Plugin
 
 var pluginLangTranslator = {
@@ -342,7 +360,7 @@ select.plugin-select-airy {
         bodyEl = $(`
 <div class="` + this.id + `-composebox-topregion-body">
     <div class="` + this.id + `-mainrow">
-        <div class="` + this.id + `-title">Language Translator - French</div>
+        <div class="` + this.id + `-title">Language Translator</div>
         <div class="` + this.id + `-langtools">
             <select class="` + this.id + `-langselect plugin-select-airy zk-styled-text-base">
             <option value="-">-</option>
