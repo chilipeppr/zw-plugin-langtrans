@@ -874,5 +874,8 @@ select.plugin-select-airy {
 
 }
 
-pluginLangTranslator.register();
+// Register with Zipwhip Plugin system
+zw.plugin.register(pluginLangTranslator);
+
+// Now load the plugin
 pluginLangTranslator.onLoad();
