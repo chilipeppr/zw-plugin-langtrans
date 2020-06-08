@@ -55,7 +55,7 @@ var pluginLangTranslator = {
         // Register our plugin with Zipwhip so it's aware of us
         // Don't really need to pass "this" yet as 2nd param, but maybe the plugin system
         // will need it in the future.
-        zw.plugin.register(this.id, this.settings, this);
+        //zw.plugin.register(this.id, this.settings, this);
 
         zw.plugin.addCss(
 "." + this.id + `-composebox-topregion-body {
@@ -874,4 +874,5 @@ select.plugin-select-airy {
 
 }
 
+pluginLangTranslator.register();
 pluginLangTranslator.onLoad();
