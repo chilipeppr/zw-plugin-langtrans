@@ -719,12 +719,16 @@ select.plugin-select-airy {
         var line = encodeURIComponent(zw.getLine());
         console.log("line:", line);
         var session = encodeURIComponent(zw.getSessionKey());
-        var url = "https://plugins.zw.wagar.cc/function/translate/get?line=" + line + "&contactId=" + contactId + "&session=" + session;
+        var url = "https://plugins.zw.wagar.cc/function/translate/get";
         console.log("url to call:", url);
 
         // do ajax query and get results.
         $.ajax({
-            type: "GET",
+            type: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify({ line: line, contactId: contactId, session: session }),
             url: url,
             success: function(data) {
                 callback(data);
@@ -757,12 +761,16 @@ select.plugin-select-airy {
         var line = encodeURIComponent(zw.getLine());
         console.log("line:", line);
         var session = encodeURIComponent(zw.getSessionKey());
-        var url = "https://plugins.zw.wagar.cc/function/translate/set?line=" + line + "&contactId=" + contactId + "&locale=" + locale + "&state=" + state + "&session=" + session;
+        var url = "https://plugins.zw.wagar.cc/function/translate/set";
         console.log("url to call:", url);
 
         // do ajax query and get results.
         $.ajax({
-            type: "GET",
+            type: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify({ line: line, contactId: contactId, session: session, locale: locale, state: state }),
             url: url,
             success: function(data) {
                 callback(data);
@@ -824,22 +832,23 @@ select.plugin-select-airy {
             return;
         }
 
-        // since using GET for now to solve https issues, build GET url
-        var url = "";
-        var param = "https://plugins.zw.wagar.cc/function/translate/keypress?";
-        param = param + "line=" + encodeURIComponent(zw.getLine());
-        param = param + "&body=" + encodeURIComponent(composeBoxTextAreaEl.val());
-        param = param + "&contactId=" + encodeURIComponent(dataContactId);
-        param = param + "&session=" + encodeURIComponent(zw.getSessionKey());
-
-        // may need to urlencode
-        url = param; //url + param;
+        // since using POST for now to solve https issues, build POST url
+        var url = "https://plugins.zw.wagar.cc/function/translate/keypress";
         console.log("url to call:", url);
 
         var that = this;
         // do ajax query and get results. based on the results i'll render shit.
         $.ajax({
-            type: "GET",
+            type: "POST",
+            data: JSON.stringify({
+                line: zw.getLine(),
+                body: composeBoxTextAreaEl.val(),
+                contactId: dataContactId,
+                session: zw.getSessionKey()
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            },
             url: url,
             // The key needs to match your method's input parameter (case-sensitive).
             // data: JSON.stringify(myData),
