@@ -716,9 +716,9 @@ select.plugin-select-airy {
         }
 
         // since using GET for now to solve https issues, build GET url
-        var line = encodeURIComponent(zw.getLine());
-        console.log("line:", line);
-        var session = encodeURIComponent(zw.getSessionKey());
+        var line = zw.getLine();
+        var session = zw.getSessionKey();
+
         var url = "https://plugins.zw.wagar.cc/function/translate/get";
         console.log("url to call:", url);
 
@@ -728,7 +728,7 @@ select.plugin-select-airy {
             headers: {
                 "Content-Type": "application/json"
             },
-            data: JSON.stringify({ line: line, contactId: contactId, session: session }),
+            data: JSON.stringify({ line: line, contactId: parseInt(contactId), session: session }),
             url: url,
             success: function(data) {
                 callback(data);
@@ -757,10 +757,9 @@ select.plugin-select-airy {
             callback(this.cacheLangList);
         }
 
-        // since using GET for now to solve https issues, build GET url
-        var line = encodeURIComponent(zw.getLine());
-        console.log("line:", line);
-        var session = encodeURIComponent(zw.getSessionKey());
+        var line = zw.getLine();
+        var session = zw.getSessionKey();
+
         var url = "https://plugins.zw.wagar.cc/function/translate/set";
         console.log("url to call:", url);
 
@@ -770,7 +769,7 @@ select.plugin-select-airy {
             headers: {
                 "Content-Type": "application/json"
             },
-            data: JSON.stringify({ line: line, contactId: contactId, session: session, locale: locale, state: state }),
+            data: JSON.stringify({ line: line, contactId: parseInt(contactId), session: session, locale: locale, state: state }),
             url: url,
             success: function(data) {
                 callback(data);
@@ -843,7 +842,7 @@ select.plugin-select-airy {
             data: JSON.stringify({
                 line: zw.getLine(),
                 body: composeBoxTextAreaEl.val(),
-                contactId: dataContactId,
+                contactId: parseInt(dataContactId),
                 session: zw.getSessionKey()
             }),
             headers: {
