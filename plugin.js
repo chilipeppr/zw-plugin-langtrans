@@ -716,8 +716,8 @@ select.plugin-select-airy {
         }
 
         // since using GET for now to solve https issues, build GET url
-        var line = zw.getLine();
-        var session = zw.getSessionKey();
+        var line = decodeURIComponent(zw.getLine());
+        var session = decodeURIComponent(zw.getSessionKey());
 
         var url = "https://plugins.zw.wagar.cc/function/translate/get";
         console.log("url to call:", url);
@@ -756,9 +756,9 @@ select.plugin-select-airy {
             // we have a list, return it
             callback(this.cacheLangList);
         }
-
-        var line = zw.getLine();
-        var session = zw.getSessionKey();
+        
+        var line = decodeURIComponent(zw.getLine());
+        var session = decodeURIComponent(zw.getSessionKey());
 
         var url = "https://plugins.zw.wagar.cc/function/translate/set";
         console.log("url to call:", url);
@@ -834,16 +834,19 @@ select.plugin-select-airy {
         // since using POST for now to solve https issues, build POST url
         var url = "https://plugins.zw.wagar.cc/function/translate/keypress";
         console.log("url to call:", url);
+        
+        var line = decodeURIComponent(zw.getLine());
+        var session = decodeURIComponent(zw.getSessionKey());
 
         var that = this;
         // do ajax query and get results. based on the results i'll render shit.
         $.ajax({
             type: "POST",
             data: JSON.stringify({
-                line: zw.getLine(),
+                line: line,
                 body: composeBoxTextAreaEl.val(),
                 contactId: parseInt(dataContactId),
-                session: zw.getSessionKey()
+                session: session
             }),
             headers: {
                 "Content-Type": "application/json"
